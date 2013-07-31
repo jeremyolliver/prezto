@@ -10,5 +10,42 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Customizations:
+
+# Aliases
+alias zshconfig="${EDITOR} ~/.zshrc"
+alias grm="git ls-files -z --deleted | xargs -0r git rm" # git rm files that are manually deleted
+alias reload!='. ~/.zshrc'
+alias rand='openssl rand -base64 10'
+
+# Not everything should be on github...
+if [[ -s ~/.zprivatenv ]]; then
+  source ~/.zprivatenv
+fi
+
+# Don't autocorrect me
+unsetopt correct_all
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+# Autojump
+if [ -f `brew --prefix`/etc/autojump.zsh ]; then
+  . `brew --prefix`/etc/autojump.zsh
+fi
+export FPATH=$FPATH:/usr/local/share/zsh/site-functions
+
+# Load compinit for autojump zsh tab completion (must be after loading autojump & setting fpath)
+autoload -U compinit; compinit
+
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# autocomplete ssh based on ~/.ssh/config
+# TODO: fix autocompletion with dashes in text
+hosts=$(awk '/^Host / {printf("%s ",$2)}' ~/.ssh/config 2>/dev/null)
+zstyle ':completion:*:hosts' hosts "$hosts"
+
+# show completion menu when number of options is at least 2
+zstyle ':completion:*' menu select=2
 

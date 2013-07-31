@@ -54,14 +54,6 @@ function prompt_jeremyolliver_setup {
   # Show git modified status
   zstyle ':prezto:module:git:info:dirty'     format ' %%B%F{red}±%f%%b'
   zstyle ':prezto:module:git:info:action'    format ':%%B%F{yellow}%s%f%%b'
-  zstyle ':prezto:module:git:info:added'     format ' %%B%F{red}±%f%%b'
-  zstyle ':prezto:module:git:info:deleted'   format ' %%B%F{red}±%f%%b'
-  zstyle ':prezto:module:git:info:modified'  format ' %%B%F{red}±%f%%b'
-  zstyle ':prezto:module:git:info:untracked' format ' %%B%F{red}±%f%%b'
-
-  # Disabled options
-  # zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
-  # zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}═%f%%b'
 
   # unknown
   zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
@@ -69,7 +61,7 @@ function prompt_jeremyolliver_setup {
 
   # Format of the git-info display
   zstyle ':prezto:module:git:info:keys' format \
-    'prompt' ' %F{cyan}git%f$(coalesce "%b" "%p" "%c")%s%D' \
+    'prompt' ' %F{cyan}git%f$(coalesce "%b" "%p" "%c")%s%D%S%A%B' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Conditional display depending on if the previous command reported an error status or not

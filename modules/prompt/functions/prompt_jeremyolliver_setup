@@ -45,11 +45,11 @@ function prompt_jeremyolliver_setup {
   # branch name
   zstyle ':prezto:module:git:info:branch' format ':%F{cyan}%b%f'
   # behind / ahead
-  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
-  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{white}⬆%f%%b'
+  zstyle ':prezto:module:git:info:behind' format ' %%B%F{white}⬇%f%%b'
 
   # show git stashes
-  zstyle ':prezto:module:git:info:stashed' format ' %%B%F{magenta}✭%S%f%%b'
+  zstyle ':prezto:module:git:info:stashed' format ' %%B%F{yellow}✭%S%f%%b'
 
   # Show git modified status
   zstyle ':prezto:module:git:info:dirty'     format ' %%B%F{red}±%f%%b'

@@ -33,6 +33,7 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'fasd' \
   'git' \
+  'bundler' \
   'prompt'
 # 'editor'
 

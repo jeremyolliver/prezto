@@ -29,15 +29,6 @@ unsetopt correct_all
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
-# Autojump
-if [ -f `brew --prefix`/etc/autojump.zsh ]; then
-  . `brew --prefix`/etc/autojump.zsh
-fi
-export FPATH=$FPATH:/usr/local/share/zsh/site-functions
-
-# Load compinit for autojump zsh tab completion (must be after loading autojump & setting fpath)
-autoload -U compinit; compinit
-
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 

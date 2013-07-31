@@ -42,9 +42,8 @@ autoload -U compinit; compinit
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # autocomplete ssh based on ~/.ssh/config
-# TODO: fix autocompletion with dashes in text
 hosts=$(awk '/^Host / {printf("%s ",$2)}' ~/.ssh/config 2>/dev/null)
-zstyle ':completion:*:hosts' hosts "$hosts"
+zstyle ':completion:*:hosts' hosts '$hosts'
 
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2

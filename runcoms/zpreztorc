@@ -26,20 +26,20 @@ zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
-  'editor' \
   'history' \
   'directory' \
   'spectrum' \
   'utility' \
   'completion' \
   'prompt'
+# 'editor'
 
 #
 # Editor
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' keymap 'emacs'
+# zstyle ':prezto:module:editor' keymap 'emacs'
 
 # Auto convert .... to ../..
 # zstyle ':prezto:module:editor' dot-expansion 'yes'

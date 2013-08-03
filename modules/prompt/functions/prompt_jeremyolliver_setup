@@ -19,9 +19,9 @@ function prompt_jeremyolliver_precmd {
 function prompt_jeremyolliver_ruby_source {
   if [ -n "$RBENV_VERSION" ]; then
     echo "shell"
-  elif [ -f "$pwd/.ruby-version" ]; then
+  elif [ -f "$PWD/.ruby-version" ]; then
     echo "local"
-  elif [ -f "$pwd/.rbenv-version" ]; then
+  elif [ -f "$PWD/.rbenv-version" ]; then
     echo "local"
   elif [ -f "$HOME/.rbenv/version" ]; then
     echo "global"

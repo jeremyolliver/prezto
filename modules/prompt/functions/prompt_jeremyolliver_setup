@@ -48,8 +48,8 @@ function prompt_jeremyolliver_setup {
   zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
 
   # behind / ahead
-  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{white}⬆%f%%b'
-  zstyle ':prezto:module:git:info:behind' format ' %%B%F{white}⬇%f%%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{white}⬆ %A%f%%b'
+  zstyle ':prezto:module:git:info:behind' format ' %%B%F{white}⬇ %B%f%%b'
 
   # show git stashes
   zstyle ':prezto:module:git:info:stashed' format ' %%B%F{yellow}✭%S%f%%b'

@@ -39,3 +39,8 @@ zstyle ':completion:*:hosts' hosts '$hosts'
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
 
+
+# Travis gem autocomplete
+if [[ - s "${ZDOTDIR:-$HOME}/.travis/travis.sh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.travis/travis.sh"
+end

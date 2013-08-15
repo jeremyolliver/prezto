@@ -41,6 +41,6 @@ zstyle ':completion:*' menu select=2
 
 
 # Travis gem autocomplete
-if [[ - s "${ZDOTDIR:-$HOME}/.travis/travis.sh" ]]; then
+if [[ -s "${ZDOTDIR:-$HOME}/.travis/travis.sh" ]]; then
   source "${ZDOTDIR:-$HOME}/.travis/travis.sh"
-end
+fi

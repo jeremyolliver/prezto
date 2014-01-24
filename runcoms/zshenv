@@ -45,6 +45,7 @@ path=(
   /usr/local/{bin,sbin}
   $path
   ~/.bin
+  /usr/local/share/npm/bin
 )
 
 #

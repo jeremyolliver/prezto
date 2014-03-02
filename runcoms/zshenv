@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='subl'
-export VISUAL='subl'
+export EDITOR='vim'
+export VISUAL='atom'
 export PAGER='less'
 
 #
@@ -44,9 +44,9 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   $path
-  ~/.bin
   /usr/local/heroku/bin
   /usr/local/share/npm/bin
+  ~/.bin
 )
 
 #
@@ -76,4 +76,3 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
-

@@ -17,6 +17,7 @@ alias zshconfig="${EDITOR} ~/.zshrc"
 alias grm="git ls-files -z --deleted | xargs -0r git rm" # git rm files that are manually deleted
 alias reload!='. ~/.zshrc'
 alias rand='openssl rand -base64 10'
+alias atom='nocorrect atom'
 
 # Not everything should be on github...
 if [[ -s ~/.zprivatenv ]]; then

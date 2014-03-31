@@ -25,6 +25,8 @@ function prompt_jeremyolliver_ruby_source {
     echo "local"
   elif [ -f "$HOME/.rbenv/version" ]; then
     echo "global"
+  else
+    echo "default"
   fi
 }
 

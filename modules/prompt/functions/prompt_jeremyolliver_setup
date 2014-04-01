@@ -66,12 +66,12 @@ function prompt_jeremyolliver_setup {
     'rprompt' '%R/%b - %c'
 
   # Conditional display depending on if the previous command reported an error status or not
-  _error_return_status_display='%(?:💚:💥) '
+  _error_return_status_display='%(?:%f❯:%F{red}❯)'
 
-  PROMPT='%F{green}%~%f${git_info:+${(e)git_info[prompt]}} $_error_return_status_display %f❯ '
+  PROMPT='%F{green}%~%f${git_info:+${(e)git_info[prompt]}} $_error_return_status_display %f'
 
   if (( $+commands[rbenv] )); then
-    RPROMPT='🍓  %F{cyan}$(rbenv version-name)%f ($(prompt_jeremyolliver_ruby_source))'
+    RPROMPT='%F{red}ruby: %F{cyan}$(rbenv version-name)%f ($(prompt_jeremyolliver_ruby_source))'
   fi
 
 }

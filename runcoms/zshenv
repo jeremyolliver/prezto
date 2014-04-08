@@ -52,6 +52,9 @@ path=(
 # OS X 10.9 XCode 5.1 workaround
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 
+# RBENV user install
+export RBENV_ROOT="$HOME/.rbenv"
+
 #
 # Less
 #

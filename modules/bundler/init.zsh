@@ -15,16 +15,9 @@ alias brake="bundle exec rake"
 if ((! $+bundled_commands)); then
   bundled_commands=(
     annotate
-    berks
     cap
     capify
-    chefspec
-    chef-apply
-    chef-client
-    chef-shell
-    chef-solo
     cucumber
-    foodcritic
     foreman
     guard
     knife

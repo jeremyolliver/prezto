@@ -32,10 +32,6 @@ zstyle ':completion:*' insert-tab pending
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH=/opt/chefdk/embedded/bin:$PATH # Ensure chef-dk is ahead of rbenv ruby installed binaries in the path
-
-# . "${RBENV_ROOT}/completions/rbenv.zsh"
-# rbenv rehash 2>/dev/null
 
 # autocomplete ssh based on ~/.ssh/config
 hosts=$(awk '/^Host / {printf("%s ",$2)}' ~/.ssh/config 2>/dev/null)

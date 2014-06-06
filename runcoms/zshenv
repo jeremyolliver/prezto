@@ -51,6 +51,11 @@ path=(
   ~/.bin
 )
 
+fpath=(
+  /usr/local/share/zsh/site-functions
+  $fpath
+)
+
 # OS X 10.9 XCode 5.1 workaround
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 

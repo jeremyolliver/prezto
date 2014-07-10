@@ -56,6 +56,9 @@ fpath=(
   $fpath
 )
 
+# Boot2docker connection
+export DOCKER_HOST=tcp://localhost:4243
+
 # OS X 10.9 XCode 5.1 workaround
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 

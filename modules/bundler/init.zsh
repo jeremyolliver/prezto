@@ -22,7 +22,6 @@ if ((! $+bundled_commands)); then
     guard
     knife
     middleman
-    nanoc
     pry
     rackup
     rainbows

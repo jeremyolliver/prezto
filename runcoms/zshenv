@@ -40,6 +40,8 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
+export GOPATH="$HOME/projects/golang"
+
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/packer/current
@@ -49,6 +51,7 @@ path=(
   /usr/local/opt/go/libexec/bin
   /usr/local/{bin,sbin}
   $path
+  $GOPATH/bin
   /opt/chefdk/embedded/bin
   ~/.bin
 )

@@ -17,9 +17,9 @@
 # Print a random, hopefully interesting, adage.
 # if (( $+commands[fortune] )); then
 #   if (( $+commands[cowsay] )); then
-#     cowsay $(fortune -a)
+#     fortune | cowsay
 #   else
-#     fortune -a
+#     fortune
 #   fi
 #   print
 # fi

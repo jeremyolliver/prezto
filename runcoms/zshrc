@@ -13,15 +13,16 @@ fi
 # Customizations:
 
 # Aliases
-alias zshconfig="${EDITOR} ~/.zshrc"
+alias zshconfig="${EDITOR} $HOME/.zshrc"
 alias grm="git ls-files -z --deleted | xargs -0r git rm" # git rm files that are manually deleted
-alias reload!='. ~/.zshrc'
+alias reload!='. $HOME/.zshrc'
 alias rand='openssl rand -base64 10'
 alias atom='nocorrect atom'
+alias reconfig!='$HOME/Dropbox/Config/bootstrap.sh'
 
 # Not everything should be on github...
-if [[ -s ~/.zprivatenv ]]; then
-  source ~/.zprivatenv
+if [[ -s ${ZDOTDIR:-$HOME}/.zprivatenv ]]; then
+  source ${ZDOTDIR:-$HOME}/.zprivatenv
 fi
 
 # Don't autocorrect me

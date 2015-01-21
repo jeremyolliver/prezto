@@ -52,6 +52,7 @@ path=(
   /usr/local/{bin,sbin}
   $path
   $GOPATH/bin
+  $HOME/.composer/vendor/bin/
   /opt/chefdk/embedded/bin
   ~/.bin
 )

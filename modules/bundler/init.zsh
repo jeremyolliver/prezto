@@ -21,6 +21,7 @@ if ((! $+bundled_commands)); then
     foreman
     guard
     knife
+    kitchen
     middleman
     pry
     rackup

@@ -13,7 +13,7 @@ fi
 # Customizations:
 
 # Aliases
-alias zshconfig="${EDITOR} $HOME/.zshrc"
+alias zshconfig="${EDITOR} ${ZDOTDIR:-$HOME}/.zshrc"
 alias grm="git ls-files -z --deleted | xargs -0r git rm" # git rm files that are manually deleted
 alias reload!='. $HOME/.zshrc'
 alias rand='openssl rand -base64 10'
@@ -46,3 +46,7 @@ zstyle ':completion:*' menu select=2
 if [[ -s "${ZDOTDIR:-$HOME}/.travis/travis.sh" ]]; then
   source "${ZDOTDIR:-$HOME}/.travis/travis.sh"
 fi
+
+# Named directories
+ops="$HOME/projects/dna-ops"
+: ~ops

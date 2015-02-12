@@ -50,3 +50,18 @@ fi
 # Named directories
 ops="$HOME/projects/dna-ops"
 : ~ops
+
+# Functions
+
+berks-open () {
+  local _editor
+  _editor="${VISUAL:-$EDITOR}"
+  if [[ -n $1 ]]; then
+    echo "opening cookbook $1 with $_editor"
+    exec $_editor $(berks show $1)
+  else
+    echo "error - usage: berks-open COOKBOOK"
+    exit(1)
+  fi
+}
+alias bo='berks-open'

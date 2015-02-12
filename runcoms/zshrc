@@ -58,7 +58,7 @@ berks-open () {
   _editor="${VISUAL:-$EDITOR}"
   if [[ -n $1 ]]; then
     echo "opening cookbook $1 with $_editor"
-    exec $_editor $(berks show $1)
+    $_editor $(berks show $1)
   else
     echo "error - usage: berks-open COOKBOOK"
     exit(1)

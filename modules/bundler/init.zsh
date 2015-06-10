@@ -67,7 +67,7 @@ for cmd in $bundled_commands; do
   eval "function bundled_$cmd () { _run-with-bundler $cmd \$@}"
   eval "function real_$cmd () { $cmd \$@}"
   alias $cmd=bundled_$cmd
-  alias r$cmd=real_$cmd
+  alias _$cmd=real_$cmd
 
   if which _$cmd > /dev/null 2>&1; then
         compdef _$cmd bundled_$cmd=$cmd

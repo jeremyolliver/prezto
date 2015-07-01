@@ -13,12 +13,15 @@ fi
 # Customizations:
 
 # Aliases
-alias zshconfig="${EDITOR} ${ZDOTDIR:-$HOME}/.zshrc"
+alias zshconfig="${VISUAL} ${ZDOTDIR:-$HOME}/.zprezto"
 alias grm="git ls-files -z --deleted | xargs -0r git rm" # git rm files that are manually deleted
 alias reload!='. $HOME/.zshrc'
 alias rand='openssl rand -base64 10'
-alias atom='nocorrect atom'
 alias reconfig!='$HOME/Dropbox/Config/bootstrap.sh'
+alias disableairdrop='sudo ifconfig awdl0 down'
+
+# disable completion
+alias atom='nocorrect atom'
 
 # Not everything should be on github...
 if [[ -s ${ZDOTDIR:-$HOME}/.zprivatenv ]]; then
@@ -51,8 +54,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.travis/travis.sh" ]]; then
 fi
 
 # Named directories
-ops="$HOME/projects/dna-ops"
-: ~ops
+#ops="$HOME/projects/dna-ops"
+#: ~ops
 
 # Functions
 

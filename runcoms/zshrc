@@ -20,6 +20,7 @@ alias rand='openssl rand -base64 10'
 alias reconfig!='$HOME/Dropbox/Config/bootstrap.sh'
 alias disableairdrop='sudo ifconfig awdl0 down'
 alias quickspecs="be rspec --tag '~integration'"
+alias spec='be rspec --no-profile --color --format documentation'
 
 # disable completion
 alias atom='nocorrect atom'

@@ -68,7 +68,7 @@ export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH="$HOME/.boot2docker/certs/boot2docker-vm"
 
 # use vagrant with vmware whenever possible
-export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+# export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 
 # OS X 10.9 XCode 5.1 workaround
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future

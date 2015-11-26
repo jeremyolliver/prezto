@@ -44,6 +44,8 @@ export GOPATH="$HOME/projects/golang"
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  /opt/chefdk/bin
+  $HOME/.rbenv/shims
   /usr/local/packer/current
   /usr/local/terraform/bin
   /usr/local/heroku/bin
@@ -53,7 +55,6 @@ path=(
   $path
   $GOPATH/bin
   $HOME/.node/bin
-  /opt/chefdk/embedded/bin
   ~/.bin
 )
 

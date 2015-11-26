@@ -40,6 +40,7 @@ unsetopt correct_all
 zstyle ':completion:*' insert-tab pending
 
 # rbenv
+# TODO: switch to chruby or otherwise stop rbenv path being inserted at head of path before chefdk
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # autocomplete ssh based on ~/.ssh/config

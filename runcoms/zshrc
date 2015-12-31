@@ -56,10 +56,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.travis/travis.sh" ]]; then
   source "${ZDOTDIR:-$HOME}/.travis/travis.sh"
 fi
 
-# Named directories
-#ops="$HOME/projects/dna-ops"
-#: ~ops
-
 # Functions
 
 berks-open () {

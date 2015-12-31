@@ -24,6 +24,7 @@ alias spec='be rspec --no-profile --color --format documentation'
 
 # disable completion
 alias atom='nocorrect atom'
+alias otto='nocorrect otto'
 
 # Not everything should be on github...
 if [[ -s ${ZDOTDIR:-$HOME}/.zprivatenv ]]; then

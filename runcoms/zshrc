@@ -22,6 +22,13 @@ alias disableairdrop='sudo ifconfig awdl0 down'
 alias quickspecs="be rspec --tag '~integration'"
 alias spec='be rspec --no-profile --color --format documentation'
 
+# Fleet and Etcd aliases
+alias fc='fleetctl'
+alias ec='etcdctl'
+alias fcl='fleetctl list-units'
+alias fcm='fleetctl list-machines'
+alias fcj='fleetctl journal'
+
 # disable completion
 alias atom='nocorrect atom'
 
@@ -74,3 +81,6 @@ berks-open () {
   fi
 }
 alias bo='berks-open'
+
+# Travis cli auto-complete
+[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"

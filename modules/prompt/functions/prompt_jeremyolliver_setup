@@ -30,6 +30,14 @@ function prompt_jeremyolliver_ruby_source {
   fi
 }
 
+function prompt_jeremyolliver_platform_env {
+  if [ -n "$PLATFORM" ]; then
+    echo ' %F{red}'\[$PLATFORM\]'%f'
+  else
+    echo ''
+  fi
+}
+
 function prompt_jeremyolliver_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
@@ -68,7 +76,7 @@ function prompt_jeremyolliver_setup {
   # Conditional display depending on if the previous command reported an error status or not
   _error_return_status_display='%(?:%f❯:%F{red}❯)'
 
-  PROMPT='%F{green}%~%f${git_info:+${(e)git_info[prompt]}} $_error_return_status_display %f'
+  PROMPT='%F{green}%~%f${git_info:+${(e)git_info[prompt]}}$(prompt_jeremyolliver_platform_env) $_error_return_status_display %f'
 
   if (( $+commands[rbenv] )); then
     RPROMPT='%F{red}ruby: %F{cyan}$(rbenv version-name)%f ($(prompt_jeremyolliver_ruby_source))'

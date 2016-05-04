@@ -64,7 +64,7 @@ fpath=(
 )
 
 # Docker Machine ENV settings
-eval "$(docker-machine env dev)"
+# eval "$(docker-machine env dev)"
 
 # use vagrant with vmware whenever possible
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion

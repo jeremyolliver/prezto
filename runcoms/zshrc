@@ -28,6 +28,7 @@ alias ec='etcdctl'
 alias fcl='fleetctl list-units'
 alias fcm='fleetctl list-machines'
 alias fcj='fleetctl journal'
+alias frm='rm $HOME/.fleetctl/known_hosts'
 
 # disable completion
 alias atom='nocorrect atom'

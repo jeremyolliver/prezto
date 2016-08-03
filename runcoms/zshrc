@@ -39,6 +39,11 @@ if [[ -s ${ZDOTDIR:-$HOME}/.zprivatenv ]]; then
   source ${ZDOTDIR:-$HOME}/.zprivatenv
 fi
 
+if [ -x "$HOME/proxy.sh" ];
+  then
+  . "$HOME/proxy.sh"
+fi
+
 # Alias git to the hub command if installed
 if which hub > /dev/null; then alias git="hub"; fi
 

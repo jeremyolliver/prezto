@@ -6,7 +6,8 @@
 #
 
 # Return if requirements are not found.
-if [[ "$OSTYPE" == darwin* ]] || (( ! $+commands[ssh-agent] )); then
+# Modified from upstream: ssh-add is no longer so functional on macOS Sierra.
+if (( ! $+commands[ssh-agent] )); then
   return 1
 fi
 

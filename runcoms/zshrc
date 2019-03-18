@@ -30,6 +30,13 @@ alias fcm='fleetctl list-machines'
 alias fcj='fleetctl journal'
 alias frm='rm $HOME/.fleetctl/known_hosts'
 
+# Kubernetes aliases
+alias kdash='open "http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=$(kubectl config current-context)" && kubectl proxy'
+alias kcontext='kubectl config use-context'
+kpods () {
+  kubectl get pods --selector="app=$1-chart"
+}
+
 # disable completion
 alias atom='nocorrect atom'
 alias otto='nocorrect otto'
@@ -39,6 +46,7 @@ if [[ -s ${ZDOTDIR:-$HOME}/.zprivatenv ]]; then
   source ${ZDOTDIR:-$HOME}/.zprivatenv
 fi
 
+alias tag_dev_version='git tag $( echo -e $(git branch | grep \* | cut -d ' ' -f2 | sed 's/\//_/g')_$( date +"%Y-%m-%d-%H%M%S" ) )'
 
 # Alias git to the hub command if installed
 if which hub > /dev/null; then alias git="hub"; fi

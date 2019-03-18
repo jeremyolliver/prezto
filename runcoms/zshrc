@@ -49,9 +49,12 @@ unsetopt correct_all
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
-# rbenv
-# TODO: switch to chruby or otherwise stop rbenv path being inserted at head of path before chefdk
+# ruby version manager: rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# Node.js version manager: nvm
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 # autocomplete ssh based on ~/.ssh/config
 hosts=$(awk '/^Host / {printf("%s ",$2)}' ~/.ssh/config 2>/dev/null)

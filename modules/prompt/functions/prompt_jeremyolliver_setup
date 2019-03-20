@@ -15,7 +15,7 @@ function prompt_jeremyolliver_precmd {
   fi
 }
 
-# Locates (naively) how/where the current ruby-version was set from, assuming
+# Locates (naively) how/where the current ruby-version was set from
 function prompt_jeremyolliver_ruby_source {
   if [ -n "$RBENV_VERSION" ]; then
     echo "shell"
@@ -30,9 +30,12 @@ function prompt_jeremyolliver_ruby_source {
   fi
 }
 
-function prompt_jeremyolliver_platform_env {
-  if [ -n "$PLATFORM" ]; then
-    echo ' %F{red}'\[$PLATFORM\]'%f'
+# Show terraform workspace in directories that contain a file matching *.tf
+function prompt_jeremyolliver_terraform_workspace {
+  if (( $+commands[terraform] )); then
+    if [[ -n *.tf(#qN) ]]; then
+      echo " %F{magenta}$(terraform workspace show)%f"
+    fi
   else
     echo ''
   fi
@@ -76,7 +79,7 @@ function prompt_jeremyolliver_setup {
   # Conditional display depending on if the previous command reported an error status or not
   _error_return_status_display='%(?:%f❯:%F{red}❯)'
 
-  PROMPT='%F{green}%~%f${git_info:+${(e)git_info[prompt]}}$(prompt_jeremyolliver_platform_env) $_error_return_status_display %f'
+  PROMPT='%F{green}%~%f${git_info:+${(e)git_info[prompt]}}$(prompt_jeremyolliver_terraform_workspace) $_error_return_status_display %f'
 
   if (( $+commands[rbenv] )); then
     RPROMPT='%F{red}ruby: %F{cyan}$(rbenv version-name)%f ($(prompt_jeremyolliver_ruby_source))'

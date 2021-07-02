@@ -18,7 +18,7 @@ fi
 #
 
 export EDITOR='vim'
-export VISUAL='atom'
+export VISUAL='code'
 export PAGER='less'
 
 #
@@ -44,18 +44,11 @@ export GOPATH="$HOME/projects/golang"
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /opt/chefdk/bin
   $HOME/.rbenv/shims
-  /usr/local/packer/current
-  /usr/local/terraform/bin
-  /usr/local/heroku/bin
-  /usr/local/share/npm/bin
-  /usr/local/opt/go/libexec/bin
   /usr/local/{bin,sbin}
   $path
   $GOPATH/bin
-  $HOME/.node/bin
-  ~/.bin
+  # ~/.bin # personal executable shortcuts
 )
 
 fpath=(
@@ -70,7 +63,7 @@ fpath=(
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 
 # OS X 10.9 XCode 5.1 workaround
-export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+# export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 
 # RBENV user install
 export RBENV_ROOT="$HOME/.rbenv"

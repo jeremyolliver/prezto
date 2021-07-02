@@ -19,16 +19,9 @@ alias reload!='. $HOME/.zshrc'
 alias rand='openssl rand -base64 10'
 alias reconfig!='$HOME/Dropbox/Config/bootstrap.sh'
 alias disableairdrop='sudo ifconfig awdl0 down'
+alias enableairdrop='sudo ifconfig awdl0 up'
 alias quickspecs="be rspec --tag '~integration'"
 alias spec='be rspec --no-profile --color --format documentation'
-
-# Fleet and Etcd aliases
-alias fc='fleetctl'
-alias ec='etcdctl'
-alias fcl='fleetctl list-units'
-alias fcm='fleetctl list-machines'
-alias fcj='fleetctl journal'
-alias frm='rm $HOME/.fleetctl/known_hosts'
 
 # Kubernetes aliases
 alias kdash='open "http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=$(kubectl config current-context)" && kubectl proxy'
@@ -39,7 +32,6 @@ kpods () {
 
 # disable completion
 alias atom='nocorrect atom'
-alias otto='nocorrect otto'
 
 # Not everything should be on github...
 if [[ -s ${ZDOTDIR:-$HOME}/.zprivatenv ]]; then
@@ -71,26 +63,18 @@ zstyle ':completion:*:hosts' hosts '$hosts'
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
 
-
-# Travis gem autocomplete
-if [[ -s "${ZDOTDIR:-$HOME}/.travis/travis.sh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.travis/travis.sh"
-fi
-
 # Functions
 
-berks-open () {
-  local _editor
-  _editor="${VISUAL:-$EDITOR}"
-  if [[ -n $1 ]]; then
-    echo "opening cookbook $1 with $_editor"
-    $_editor $(berks show $1)
-  else
-    echo "error - usage: berks-open COOKBOOK"
-    exit(1)
-  fi
-}
-alias bo='berks-open'
 
-# Travis cli auto-complete
-[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
+# berks-open () {
+#   local _editor
+#   _editor="${VISUAL:-$EDITOR}"
+#   if [[ -n $1 ]]; then
+#     echo "opening cookbook $1 with $_editor"
+#     $_editor $(berks show $1)
+#   else
+#     echo "error - usage: berks-open COOKBOOK"
+#     exit(1)
+#   fi
+# }
+# alias bo='berks-open'

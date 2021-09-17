@@ -23,6 +23,12 @@ alias enableairdrop='sudo ifconfig awdl0 up'
 alias quickspecs="be rspec --tag '~integration'"
 alias spec='be rspec --no-profile --color --format documentation'
 
+# Attempt to delete all local branches that aren't tracking a remote branch, or where the remote branch is removed
+git-nuke () {
+  git remote update --prune origin
+  git branch -v | grep "[gone]" | awk '{ print $1}' | grep -Ev 'main|master|\*' | xargs git branch -d
+}
+
 # Kubernetes aliases
 alias kdash='open "http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=$(kubectl config current-context)" && kubectl proxy'
 alias kcontext='kubectl config use-context'

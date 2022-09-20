@@ -34,7 +34,7 @@ function prompt_jeremyolliver_ruby_source {
 function prompt_jeremyolliver_terraform_workspace {
   if (( $+commands[terraform] )); then
     if [[ -n *.tf(#qN) ]]; then
-      echo " %F{magenta}$(terraform workspace show)%f"
+      echo " %F{magenta}tf%f:%F{magenta}$(terraform workspace show)%f"
     fi
   else
     echo ''

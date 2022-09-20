@@ -22,6 +22,8 @@ alias disableairdrop='sudo ifconfig awdl0 down'
 alias enableairdrop='sudo ifconfig awdl0 up'
 alias quickspecs="be rspec --tag '~integration'"
 alias spec='be rspec --no-profile --color --format documentation'
+# brew install python@3.9
+alias python=/usr/local/bin/python3
 
 # History Config
 HISTSIZE=10000                     # How many lines of history to keep in memory
@@ -34,12 +36,17 @@ setopt    extended_history         # Add timestamp and duration to history
 # zshaddhistory() {
 # }
 
+export KICS_QUERIES_PATH=/usr/local/opt/kics/share/kics/assets/queries
+
 # Kubernetes aliases
 alias kdash='open "http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=$(kubectl config current-context)" && kubectl proxy'
 alias kcontext='kubectl config use-context'
 kpods () {
   kubectl get pods --selector="app=$1-chart"
 }
+
+# Kubernetes ZSH Completion
+source <(kubectl completion zsh)
 
 # disable completion
 alias atom='nocorrect atom'

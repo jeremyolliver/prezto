@@ -59,7 +59,7 @@ fi
 alias tag_dev_version='git tag $( echo -e $(git branch | grep \* | cut -d ' ' -f2 | sed 's/\//_/g')_$( date +"%Y-%m-%d-%H%M%S" ) )'
 
 # Alias git to the hub command if installed
-if which hub > /dev/null; then alias git="hub"; fi
+#if which hub > /dev/null; then alias git="hub"; fi
 
 # Don't autocorrect me
 unsetopt correct_all

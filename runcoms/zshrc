@@ -10,6 +10,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# brew install kube-ps1
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+
+# Python3 VirtualEnv
+# brew install python3
+# python3 -m venv ~/.venv 
+source "${ZDOTDIR:-$HOME}/.venv/bin/activate"
+
 # Customizations:
 
 # Aliases
@@ -36,6 +44,22 @@ setopt    extended_history         # Add timestamp and duration to history
 # zshaddhistory() {
 # }
 
+aws_session_time_left() {
+  zulu_time_now=`date -u +'%Y-%m-%dT%H:%M:%SZ'`
+
+  aws_session_expiration_epoch="`date -j -u -f '%Y-%m-%dT%H:%M:%SZ' $AWS_CREDENTIAL_EXPIRATION '+%s'`"
+  zulu_time_now_epoch="`date -j -u -f '%Y-%m-%dT%H:%M:%SZ' $zulu_time_now '+%s'`"
+
+  if [[ $zulu_time_now < $AWS_CREDENTIAL_EXPIRATION ]]; then
+    secs="`expr $aws_session_expiration_epoch - $zulu_time_now_epoch`"
+    echo "`printf '\e[33m %s AWS SESSION TIMEOUT IN %dh:%02dm:%02ds\e[0m' $AWS_VAULT_PROFILE $((secs/3600)) $((secs%3600/60)) $((secs%60))`"
+  else
+    secs="`expr $zulu_time_now_epoch - $aws_session_expiration_epoch`"
+    echo "-`printf '\e[31m AWS SESSION EXPIRED !!! %dh:%02dm:%02ds\e[0m' $((secs/3600)) $((secs%3600/60)) $((secs%60))`"
+  fi
+}
+
+
 export KICS_QUERIES_PATH=/usr/local/opt/kics/share/kics/assets/queries
 
 # Kubernetes aliases
@@ -47,6 +71,11 @@ kpods () {
 
 # Kubernetes ZSH Completion
 source <(kubectl completion zsh)
+
+# works better than kube-ns
+kns () {
+  kubectl config set-context --current --namespace="$1"
+}
 
 # disable completion
 alias atom='nocorrect atom'
@@ -87,4 +116,10 @@ zstyle ':completion:*' menu select=2
 git-nuke () {
   git remote update --prune origin
   git branch -v | grep "[gone]" | awk '{ print $1}' | grep -Ev 'main|master|\*' | xargs git branch -d
+}
+
+dropped_traffic () {
+  kubectl -n kube-system port-forward svc/hubble-relay 4245:80 &
+  sleep(5)
+  hubble observe -f --verdict DROPPED --protocol TCP
 }

@@ -1,0 +1,83 @@
+[user]
+	name = Jeremy Olliver
+	email = XXXXXXXX
+[help]
+  autocorrect = 1
+[alias]
+  st = status
+  ci = commit
+  cia = commit -a
+  co = checkout
+  sc = show HEAD
+  clone = clone --recursive
+  dic = diff --cached
+  rb = rebase
+  ba = branch -a
+  b = branch
+  cp = cherry-pick
+  amend = commit --amend
+  pom = push origin master
+  pr = remote update origin --prune
+  w = whatchanged
+  gl = log --graph
+  #lol = log --graph --pretty=format:'%C(red)%h%C(reset) %C(yellow)%d%C(reset)%s %C(green)%an %C(bold black)%cr%C(reset)' --abbrev-commit --date=relative
+  glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold blue)<%an>%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  standup = shortlog --since=yesterday
+  rank = shortlog -sn --no-merges
+  head = rev-parse HEAD
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+[core]
+  editor = vim
+	excludesfile = /Users/jeremyo/.gitignore_global
+[rerere]
+    enabled = true
+    autoupdate = true
+[github]
+  user = jeremyolliver
+  token = 0d63735084a1349280621316400227419914fbfc
+[push]
+  default = current
+[branch]
+  autosetupmerge = true
+[rebase]
+  autosquash = true
+
+[merge]
+    tool = sourcetree
+[diff]
+    tool = opendiff
+
+# Install p4merge.app from http://www.perforce.com/downloads/helix#clients
+
+[difftool "p4merge"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$REMOTE\"" "\"$LOCAL\""
+
+[mergetool "p4merge"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$PWD/$BASE\"" "\"$PWD/$REMOTE\"" "\"$PWD/$LOCAL\"" "\"$PWD/$MERGED\""
+	keepTemporaries = false
+	trustExitCode = false
+	keepBackup = false
+
+[difftool "opendiff"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main

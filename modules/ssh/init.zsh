@@ -28,13 +28,18 @@ else
   source "$_ssh_agent_env" 2> /dev/null
 fi
 
+_ssh_flags=""
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  _ssh_flags="--apple-load-keychain"
+fi
+
 # Load identities.
 if ssh-add -l 2>&1 | grep 'The agent has no identities'; then
   zstyle -a ':prezto:module:ssh:load' identities '_ssh_identities'
   if (( ${#identities} > 0 )); then
-    ssh-add "$_ssh_dir/${^_ssh_identities[@]}"
+    ssh-add "$_ssh_dir/${^_ssh_identities[@]}" "$_ssh_flags"
   else
-    ssh-add
+    ssh-add "$_ssh_flags"
   fi
 fi
 

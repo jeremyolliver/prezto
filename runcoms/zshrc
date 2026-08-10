@@ -10,8 +10,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# ASDF Versions manager
+export PATH="$HOME/.asdf/shims:$PATH"
+
 # brew install kube-ps1
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 
 # Python3 VirtualEnv
 # brew install python3
@@ -31,7 +34,6 @@ alias enableairdrop='sudo ifconfig awdl0 up'
 alias quickspecs="be rspec --tag '~integration'"
 alias spec='be rspec --no-profile --color --format documentation'
 # brew install python@3.9
-alias python=/usr/local/bin/python3
 
 # History Config
 HISTSIZE=10000                     # How many lines of history to keep in memory
@@ -60,10 +62,8 @@ aws_session_time_left() {
 }
 
 
-export KICS_QUERIES_PATH=/usr/local/opt/kics/share/kics/assets/queries
-
 # Kubernetes aliases
-alias kdash='open "http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=$(kubectl config current-context)" && kubectl proxy'
+#alias kdash='open "http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=$(kubectl config current-context)" && kubectl proxy'
 alias kcontext='kubectl config use-context'
 kpods () {
   kubectl get pods --selector="app=$1-chart"
@@ -76,9 +76,6 @@ source <(kubectl completion zsh)
 kns () {
   kubectl config set-context --current --namespace="$1"
 }
-
-# disable completion
-alias atom='nocorrect atom'
 
 # Not everything should be on github...
 if [[ -s ${ZDOTDIR:-$HOME}/.zprivatenv ]]; then
@@ -100,8 +97,8 @@ zstyle ':completion:*' insert-tab pending
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Node.js version manager: nvm
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
 
 # autocomplete ssh based on ~/.ssh/config
 hosts=$(awk '/^Host / {printf("%s ",$2)}' ~/.ssh/config 2>/dev/null)
@@ -123,3 +120,5 @@ dropped_traffic () {
   sleep(5)
   hubble observe -f --verdict DROPPED --protocol TCP
 }
+
+export PATH="$HOME/.local/bin:$PATH"

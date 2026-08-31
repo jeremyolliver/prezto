@@ -122,3 +122,6 @@ dropped_traffic () {
 }
 
 export PATH="$HOME/.local/bin:$PATH"
+
+
+#export DOCKER_BUILDKIT=1

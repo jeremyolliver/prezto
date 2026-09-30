@@ -115,6 +115,94 @@ git-nuke () {
   git branch -v | grep "[gone]" | awk '{ print $1}' | grep -Ev 'main|master|\*' | xargs git branch -d
 }
 
+# Branch helpers for trunk-based work, with a pull-request workflow, where incoming branches use the format: <type>/<owner>/<short-description>
+
+_git-slug () {
+  print -r -- "$*" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g'
+}
+
+# First name from git user.name. Override with GIT_BRANCH_OWNER.
+_git-branch-owner () {
+  local name=${GIT_BRANCH_OWNER:-$(git config user.name)}
+  _git-slug ${name%% *}
+}
+
+# origin's default branch, e.g. "main". Asks the remote if origin/HEAD isn't set locally.
+_git-default-branch () {
+  local ref
+  ref=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null) ||
+    { git remote set-head origin --auto >/dev/null &&
+      ref=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD) } || return 1
+  print -r -- ${ref#origin/}
+}
+
+# Squash merges hide the branch's commits from `git branch -d`, so check the work landed another way:
+#   - a merged PR whose head contains every local commit (covers suggestions applied on GitHub), or
+#   - merging the branch into origin's copy of the base branch would change nothing.
+_git-work-landed () {
+  local branch=$1 base=$2 pr head
+  if (( $+commands[gh] )); then
+    read pr head < <(gh pr list --head "$branch" --state merged --limit 1 \
+      --json number,headRefOid --jq '.[] | "\(.number) \(.headRefOid)"' 2>/dev/null)
+    if [[ -n $pr ]] && git fetch --quiet origin "refs/pull/$pr/head" &&
+       git merge-base --is-ancestor "$branch" "$head"; then
+      print "PR #$pr merged with all local commits"
+      return 0
+    fi
+  fi
+  [[ $(git merge-tree --write-tree "origin/$base" "$branch" 2>/dev/null) == $(git rev-parse "origin/$base^{tree}") ]]
+}
+
+# Start a personal branch off the latest default branch.
+#   git-start feature Add password reset  ->  feature/jeremy/add-password-reset
+git-start () {
+  local type=$1 default
+  if [[ ! $type =~ ^(feature|fix|chore|refactor|docs|test)$ || $# -lt 2 ]]; then
+    print -u2 "usage: git-start <feature|fix|chore|refactor|docs|test> <short description>"
+    return 1
+  fi
+  shift
+  default=$(_git-default-branch) || return 1
+  git fetch --prune origin || return 1
+  git switch --no-track -c "$type/$(_git-branch-owner)/$(_git-slug "$@")" "origin/$default"
+}
+
+# Finish a branch once its PR is merged: switch to the base branch (default branch unless given),
+# fast-forward it, prune remote refs, and delete the old local branch if it's mine and its work landed.
+#   git-finish               ->  back to main
+#   git-finish release/1.4   ->  back to release/1.4
+git-finish () {
+  local branch base owner
+  branch=$(git symbolic-ref --quiet --short HEAD) || { print -u2 "git-finish: detached HEAD"; return 1 }
+  base=${1:-$(_git-default-branch)} || return 1
+  owner=$(_git-branch-owner)
+
+  if [[ -n $(git status --porcelain --untracked-files=no) ]]; then
+    print -u2 "git-finish: $branch has uncommitted changes, commit or stash them first"
+    return 1
+  fi
+
+  git fetch --prune origin || return 1
+  git rev-parse --verify --quiet "refs/remotes/origin/$base" >/dev/null ||
+    { print -u2 "git-finish: origin/$base doesn't exist"; return 1 }
+  git switch --quiet "$base" || return 1
+  git merge --ff-only --quiet "origin/$base" ||
+    { print -u2 "git-finish: local $base has diverged from origin/$base"; return 1 }
+
+  [[ $branch == $base ]] && return 0
+  if [[ $branch != */$owner/* ]]; then
+    print "Kept $branch (not owned by $owner)"
+    return 0
+  fi
+
+  if _git-work-landed "$branch" "$base"; then
+    git branch -D "$branch"
+  else
+    print -u2 "git-finish: can't confirm $branch landed on $base, so kept it. If you're sure: git branch -D $branch"
+    return 1
+  fi
+}
+
 dropped_traffic () {
   kubectl -n kube-system port-forward svc/hubble-relay 4245:80 &
   sleep(5)
